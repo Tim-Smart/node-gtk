@@ -11,6 +11,7 @@
 #include "ngtk_image.h"
 #include "ngtk_button.h"
 #include "ngtk_entry.h"
+#include "ngtk_hsv.h"
 
 
 namespace ngtk {
@@ -184,6 +185,14 @@ extern "C" void init(Handle<Object> target) {
   NGTK_DEFINE_CONSTANT(target, "RESPONSE_APPLY",        GTK_RESPONSE_APPLY);
   NGTK_DEFINE_CONSTANT(target, "RESPONSE_HELP",         GTK_RESPONSE_HELP);
 
+  // Direction type constants
+  NGTK_DEFINE_CONSTANT(target, "DIR_TAB_FORWARD",       GTK_DIR_TAB_FORWARD);
+  NGTK_DEFINE_CONSTANT(target, "DIR_TAB_BACKWARD",      GTK_DIR_TAB_BACKWARD);
+  NGTK_DEFINE_CONSTANT(target, "DIR_UP",                GTK_DIR_UP);
+  NGTK_DEFINE_CONSTANT(target, "DIR_DOWN",              GTK_DIR_DOWN);
+  NGTK_DEFINE_CONSTANT(target, "DIR_LEFT",              GTK_DIR_LEFT);
+  NGTK_DEFINE_CONSTANT(target, "DIR_RIGHT",             GTK_DIR_RIGHT);
+
   Window::Initialize(target);
   Hbox::Initialize(target);
   Vbox::Initialize(target);
@@ -192,6 +201,7 @@ extern "C" void init(Handle<Object> target) {
   ProgressBar::Initialize(target);
   Image::Initialize(target);
   Entry::Initialize(target);
+  HSV::Initialize(target);
 
   GMainContext *gc     = g_main_context_default();
   struct econtext *ctx = &default_context;

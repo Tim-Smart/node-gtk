@@ -27,6 +27,7 @@ def build(bld):
                src/ngtk_window.cc
                src/ngtk_container.cc
                src/ngtk_widget.cc
+               src/ngtk_hsv.cc
                src/ngtk.cc
                """
   obj.uselib = "GTK GLIB"
