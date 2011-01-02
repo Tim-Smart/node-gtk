@@ -9,6 +9,7 @@ namespace ngtk {
 class MessageDialog : public Widget {
 public:
   static void           SetPrototypeMethods (v8::Handle<v8::FunctionTemplate> constructor_template);
+  static void           RegisterCallbacks   (std::vector<SignalCallback> *callbacks);
   static void           Initialize          (v8::Handle<v8::Object> target);
   static MessageDialog* New                 (Window *parent, GtkDialogFlags flags,
                                              GtkMessageType type, GtkButtonsType buttons,
@@ -22,6 +23,8 @@ private:
 
   MessageDialog(GtkWindow *parent, GtkDialogFlags flags, GtkMessageType type,
                 GtkButtonsType buttons, char *message);
+
+  static void SignalResponse (GtkMessageDialog *dialog, GtkResponseType response, gpointer callback_ptr);
 };
 
 } // namespace ngtk

@@ -69,11 +69,30 @@ MessageDialog::MessageDialog (GtkWindow *parent, GtkDialogFlags flags,
   widget_ = gtk_message_dialog_new(parent, flags, type, buttons, "%s", message);
 }
 
+void MessageDialog::SignalResponse (GtkMessageDialog *dialog, GtkResponseType response, gpointer callback_ptr) {
+  Persistent<Function> *callback = reinterpret_cast<Persistent<Function>*>(callback_ptr);
+  TryCatch try_catch;
+
+  Local<Value> argv[1] = { v8::Number::New(response) };
+
+  (*callback)->Call(Context::GetCurrent()->Global(), 1, argv);
+
+  if (try_catch.HasCaught()) {
+    //FatalException(try_catch);
+  }
+}
+
+
 // Export.
 void MessageDialog::SetPrototypeMethods (Handle<FunctionTemplate> constructor_template) {
   HandleScope scope;
 
   Widget::SetPrototypeMethods(constructor_template);
+}
+
+void MessageDialog::RegisterCallbacks (std::vector<SignalCallback> *callbacks) {
+  Widget::RegisterCallbacks(callbacks);
+  (*callbacks).push_back(SignalCallback("response", G_CALLBACK(MessageDialog::SignalResponse)));
 }
 
 void MessageDialog::Initialize (Handle<Object> target) {
@@ -85,6 +104,7 @@ void MessageDialog::Initialize (Handle<Object> target) {
   constructor_template->SetClassName(String::NewSymbol("MessageDialog"));
 
   MessageDialog::SetPrototypeMethods(constructor_template);
+  MessageDialog::RegisterCallbacks(callbacks);
 
   target->Set(String::NewSymbol("MessageDialog"), constructor_template->GetFunction());
 }
