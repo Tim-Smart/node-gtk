@@ -35,7 +35,10 @@ process.nextTick ->
 
   button.on 'clicked', ->
     console.log 'clicked'
-    dialog = new gtk.MessageDialog window, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Node.js + GTK <3'
+    dialog = new gtk.MessageDialog window, gtk.DIALOG_DESTROY_WITH_PARENT | gtk.DIALOG_MODAL, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Node.js + GTK <3'
+    dialog.on 'response', (response) ->
+      console.log response
+      dialog.destroy()
     dialog.show()
 
   hbox2.add button
