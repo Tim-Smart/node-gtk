@@ -30,7 +30,11 @@ process.nextTick(function() {
   button.on('clicked', function() {
     var dialog;
     console.log('clicked');
-    dialog = new gtk.MessageDialog(window, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Node.js + GTK <3');
+    dialog = new gtk.MessageDialog(window, gtk.DIALOG_DESTROY_WITH_PARENT | gtk.DIALOG_MODAL, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Node.js + GTK <3');
+    dialog.on('response', function(response) {
+      console.log(response);
+      return dialog.destroy();
+    });
     return dialog.show();
   });
   hbox2.add(button);
