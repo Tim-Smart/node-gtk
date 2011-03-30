@@ -108,9 +108,10 @@ Handle<Value> ProgressBar::SetPulseStep (const Arguments &args) {
   HandleScope scope;
 
   if (args[0]->IsNumber()) {
-      GtkWidget *progressbar = ProgressBar::Data(args.This());
-      double pulse_step = args[0]->NumberValue();
-      gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(progressbar), pulse_step);
+    GtkWidget *progressbar = ProgressBar::Data(args.This());
+    double pulse_step      = args[0]->NumberValue();
+
+    gtk_progress_bar_set_pulse_step(GTK_PROGRESS_BAR(progressbar), pulse_step);
   }
   return args.This();
 }
@@ -131,11 +132,11 @@ void ProgressBar::SetPrototypeMethods (Handle<FunctionTemplate> constructor_temp
 
   Widget::SetPrototypeMethods(constructor_template);
 
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "pulse", ProgressBar::Pulse);
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setText", ProgressBar::SetText);
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getText", ProgressBar::GetText);
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setFraction", ProgressBar::SetFraction);
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getFraction", ProgressBar::GetFraction);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "pulse",        ProgressBar::Pulse);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setText",      ProgressBar::SetText);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getText",      ProgressBar::GetText);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setFraction",  ProgressBar::SetFraction);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getFraction",  ProgressBar::GetFraction);
   NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setPulseStep", ProgressBar::SetPulseStep);
   NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getPulseStep", ProgressBar::GetPulseStep);
 }
@@ -144,7 +145,8 @@ void ProgressBar::Initialize (Handle<Object> target) {
   HandleScope scope;
 
   Local<FunctionTemplate> t = FunctionTemplate::New(ProgressBar::New);
-  constructor_template = Persistent<FunctionTemplate>::New(t);
+  constructor_template      = Persistent<FunctionTemplate>::New(t);
+
   constructor_template->InstanceTemplate()->SetInternalFieldCount(1);
   constructor_template->SetClassName(String::NewSymbol("ProgressBar"));
 
