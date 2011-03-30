@@ -76,10 +76,10 @@ Handle<Value> Button::SetImage (const Arguments &args) {
   HandleScope scope;
 
   GtkWidget *button = Button::Data(args.This());
-  GtkWidget *other = Image::Data(args[0]->ToObject());
+  GtkWidget *image  = Image::Data(args[0]->ToObject());
 
-  gtk_button_set_image(GTK_BUTTON(button), other);
-  
+  gtk_button_set_image(GTK_BUTTON(button), image);
+
   return args.This();
 }
 

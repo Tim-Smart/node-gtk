@@ -2,7 +2,6 @@
 #define NGTK_WIDGET_H_
 
 #include <node_object_wrap.h> // node::ObjectWrap
-#include "v8.h"
 #include "ngtk.h"
 #include <vector>
 
@@ -34,9 +33,9 @@ public:
   static std::vector<SignalCallback> *callbacks;
 
   // Event handlers.
-  static void     SignalBare   (GtkWidget *widget, gpointer callback_ptr);
-  static gboolean SignalBoolean(GtkWidget *widget, gpointer callback_ptr);
-  static gboolean SignalFocus  (GtkWidget *widget, GtkDirectionType direction, gpointer callback_ptr);
+  static void     SignalBare    (GtkWidget *widget, gpointer callback_ptr);
+  static gboolean SignalBoolean (GtkWidget *widget, gpointer callback_ptr);
+  static gboolean SignalFocus   (GtkWidget *widget, GtkDirectionType direction, gpointer callback_ptr);
 
 private:
   // Add signal handler.

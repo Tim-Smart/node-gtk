@@ -58,9 +58,9 @@ Handle<Value> HSV::SetColor (const Arguments &args) {
   HandleScope scope;
 
   GtkWidget *hsv = HSV::Data(args.This());
-  double h = args[0]->NumberValue();
-  double s = args[1]->NumberValue();
-  double v = args[2]->NumberValue();
+  double     h   = args[0]->NumberValue();
+  double     s   = args[1]->NumberValue();
+  double     v   = args[2]->NumberValue();
 
   gtk_hsv_set_color(GTK_HSV(hsv), h, s, v);
 
@@ -78,9 +78,9 @@ Handle<Value> HSV::GetColor (const Arguments &args) {
   HandleScope scope;
 
   GtkWidget *hsv = HSV::Data(args.This());
-  double h = 0;
-  double s = 0;
-  double v = 0;
+  double     h   = 0;
+  double     s   = 0;
+  double     v   = 0;
 
   gtk_hsv_get_color(GTK_HSV(hsv), &h, &s, &v);
   v8::Handle<v8::Array> c = v8::Array::New(3);
@@ -154,8 +154,8 @@ void HSV::SetPrototypeMethods (Handle<FunctionTemplate> constructor_template) {
 
   Widget::SetPrototypeMethods(constructor_template);
 
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setColor",       HSV::SetColor);
-  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getColor",       HSV::GetColor);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "setColor", HSV::SetColor);
+  NGTK_SET_PROTOTYPE_METHOD(constructor_template, "getColor", HSV::GetColor);
 
   NGTK_SET_METHOD(constructor_template, "hsvToRgb", HsvToRgb);
   NGTK_SET_METHOD(constructor_template, "rgbToHsv", RgbToHsv);
@@ -184,7 +184,8 @@ void HSV::Initialize (Handle<Object> target) {
   HandleScope scope;
 
   Local<FunctionTemplate> t = FunctionTemplate::New(HSV::New);
-  constructor_template = Persistent<FunctionTemplate>::New(t);
+  constructor_template      = Persistent<FunctionTemplate>::New(t);
+
   constructor_template->InstanceTemplate()->SetInternalFieldCount(1);
   constructor_template->SetClassName(String::NewSymbol("HSV"));
 
