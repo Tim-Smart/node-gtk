@@ -1,6 +1,5 @@
 var gtk;
-console.log('test.js');
-gtk = require('./build/default/gtk');
+gtk = require('../build/default/gtk');
 process.nextTick(function() {
   var button, entry, hbox, hbox2, hbox3, img, progress_hbox, progressbar, window;
   gtk.init();

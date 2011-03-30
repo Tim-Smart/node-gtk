@@ -1,5 +1,4 @@
-console.log 'test.js'
-gtk = require './build/default/gtk'
+gtk = require '../build/default/gtk'
 
 process.nextTick ->
   gtk.init()
